@@ -1,10 +1,10 @@
-# 🚀 Semantic Version GitHub Action
+# Semantic Version GitHub Action
 
 Automatically calculate the next semantic version (`MAJOR.MINOR.PATCH`) based on commit messages, branch names, or pull-request labels.
 
 ---
 
-## ✨ Features
+## Features
 
 - Detects change type from commit messages, branch names, or PR labels
 - Configurable token → version bump mapping
@@ -13,7 +13,7 @@ Automatically calculate the next semantic version (`MAJOR.MINOR.PATCH`) based on
 
 ---
 
-## 📦 Quick Start
+## Quick Start
 
 ### Basic Usage (Recommended)
 
@@ -47,7 +47,7 @@ Automatically calculate the next semantic version (`MAJOR.MINOR.PATCH`) based on
 
 ---
 
-## 📋 Inputs & Outputs
+## Inputs & Outputs
 
 **Inputs:**
 - `type` – Detection mode: `label`, `commit`, or `branch` (default: `label`)
@@ -60,7 +60,7 @@ Automatically calculate the next semantic version (`MAJOR.MINOR.PATCH`) based on
 
 ---
 
-## 🎯 Detection Modes
+## Detection Modes
 
 **`label`** – Reads first PR label (e.g., `feature`, `bug`)  
 **`commit`** – Extracts from commit message: `[feature]` or `fix:`  
@@ -68,7 +68,7 @@ Automatically calculate the next semantic version (`MAJOR.MINOR.PATCH`) based on
 
 ---
 
-## 🔧 Complete Example
+## Complete Example
 
 ```yaml
 name: Auto Version
@@ -104,7 +104,7 @@ jobs:
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 **No version generated?**  
 → Check if token matches your `map` keys. View logs for detection messages.
