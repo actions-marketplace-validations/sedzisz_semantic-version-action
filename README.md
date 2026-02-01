@@ -1,10 +1,10 @@
-# 🚀 Semantic Version GitHub Action
+# Semantic Version GitHub Action
 
 Automatically calculate the next semantic version (`MAJOR.MINOR.PATCH`) based on commit messages, branch names, or pull-request labels.
 
 ---
 
-## ✨ Features
+## Features
 
 - Detects change type from commit messages, branch names, or PR labels
 - Configurable token → version bump mapping
@@ -14,7 +14,7 @@ Automatically calculate the next semantic version (`MAJOR.MINOR.PATCH`) based on
 
 ---
 
-## 📦 Quick Start
+## Quick Start
 
 ### Basic Usage (Recommended)
 
@@ -48,7 +48,7 @@ Automatically calculate the next semantic version (`MAJOR.MINOR.PATCH`) based on
 
 ---
 
-## 📋 Inputs & Outputs
+## Inputs & Outputs
 
 **Inputs:**
 - `type` – Detection mode: `label`, `commit`, or `branch` (default: `label`)
@@ -61,7 +61,7 @@ Automatically calculate the next semantic version (`MAJOR.MINOR.PATCH`) based on
 
 ---
 
-## 🔄 Versioning Logic
+## Versioning Logic
 
 The action automatically determines the current version by scanning Git tags in the repository:
 - Searches for tags matching `v*.*.*` (e.g., `v1.2.3`) or `*.*.*` (e.g., `1.2.3`)
@@ -71,7 +71,7 @@ The action automatically determines the current version by scanning Git tags in 
 
 ---
 
-## 🎯 Detection Modes
+## Detection Modes
 
 **`label`** – Reads first PR label (e.g., `feature`, `bug`)  
 **`commit`** – Extracts from commit message: `[feature]` or `fix:`  
@@ -79,7 +79,7 @@ The action automatically determines the current version by scanning Git tags in 
 
 ---
 
-## 🔧 Complete Example
+## Complete Example
 
 ```yaml
 name: Auto Version
@@ -96,7 +96,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Required for Git tag detection
+          fetch-depth: 0
 
       - name: Calculate version
         id: version
@@ -115,7 +115,7 @@ jobs:
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 **No version generated?**  
 → Check if token matches your `map` keys. View logs for detection messages.
@@ -126,9 +126,6 @@ jobs:
 **Empty outputs?**  
 → Add `id: version` to your step. For `docker://`, use `env:` not `with:`.
 
-**Version starts at v0.0.0?**  
-→ Ensure `fetch-depth: 0` is set in checkout step to access all Git tags.
-
 ---
 
 ## 📊 Method Comparison
@@ -138,3 +135,4 @@ jobs:
 | Syntax | `with:` ✅ | `env:` only |
 | Multi-line JSON | ✅ | ❌ |
 | Recommended | ✅ | Testing only |
+
