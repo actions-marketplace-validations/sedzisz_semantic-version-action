@@ -1,4 +1,4 @@
-FROM debian:stable-slim
+FROM public.ecr.aws/docker/library/debian:stable-slim
 ARG DEBIAN_FRONTEND=noninteractive
 
 LABEL org.opencontainers.image.title="semantic-version-action"
