@@ -126,6 +126,17 @@ jobs:
 **Empty outputs?**  
 → Add `id: version` to your step. For `docker://`, use `env:` not `with:`.
 
+**Always computing `v0.0.1` despite existing tags? (Gitea Actions)**  
+→ Gitea mounts the workspace at a different path than GitHub. Make sure `fetch-depth: 0` is set so all tags are fetched:
+
+```yaml
+- uses: actions/checkout@v3
+  with:
+    fetch-depth: 0
+```
+
+Without `fetch-depth: 0`, Git history and tags are not fetched and the action falls back to `v0.0.0`.
+
 ---
 
 ## 📊 Method Comparison
