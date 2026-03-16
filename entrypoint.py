@@ -33,7 +33,7 @@ log = logging.getLogger()
 
 TYPE = os.environ.get("INPUT_TYPE", "label")
 MAP_RAW = os.environ.get("INPUT_MAP", "")
-WORKDIR = "/github/workspace"
+WORKDIR = os.environ.get("GITHUB_WORKSPACE", "/github/workspace")
 GITHUB_OUTPUT = os.environ.get("GITHUB_OUTPUT", "/github/workflow/output")
 
 
