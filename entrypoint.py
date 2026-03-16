@@ -5,6 +5,7 @@ GitHub Actions automatically converts inputs to INPUT_* environment variables.
 For example: input "type" becomes INPUT_TYPE, input "map" becomes INPUT_MAP
 """
 
+import glob
 import json
 import logging
 import os
@@ -33,8 +34,25 @@ log = logging.getLogger()
 
 TYPE = os.environ.get("INPUT_TYPE", "label")
 MAP_RAW = os.environ.get("INPUT_MAP", "")
-WORKDIR = os.environ.get("GITHUB_WORKSPACE", "/github/workspace")
 GITHUB_OUTPUT = os.environ.get("GITHUB_OUTPUT", "/github/workflow/output")
+
+
+def find_workdir() -> str:
+    # Explicit env variable takes priority
+    explicit = os.environ.get("GITHUB_WORKSPACE") or os.environ.get("WORKDIR")
+    if explicit and os.path.isdir(explicit):
+        return explicit
+    # Gitea mounts workspace as /workspace/<org>/<repo>
+    matches = glob.glob("/workspace/*/*")
+    if matches:
+        return matches[0]
+    # GitHub Actions default
+    if os.path.isdir("/github/workspace"):
+        return "/github/workspace"
+    return "."
+
+
+WORKDIR = find_workdir()
 
 
 # ---------------------------------------------------------------------------
@@ -165,6 +183,7 @@ def map_to_bump(token: str, mapping: dict) -> str:
 
 def main() -> int:
     log.info("Semantic version action started. mode=%s", TYPE)
+    log.info("Using workdir: %s", WORKDIR)
     log.debug("INPUT_TYPE='%s' INPUT_MAP='%s'", os.environ.get("INPUT_TYPE", ""), MAP_RAW)
 
     map_str = MAP_RAW.replace("\n", "").replace("\r", "").replace("\t", "").strip()
@@ -236,6 +255,5 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    if os.path.isdir(WORKDIR):
-        os.chdir(WORKDIR)
+    os.chdir(WORKDIR)
     sys.exit(main())
